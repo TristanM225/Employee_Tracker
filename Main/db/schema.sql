@@ -6,9 +6,9 @@ CREATE DATABASE tracker_db;
 USE tracker_db;
 
 -- Creating a table for departments
-CREATE TABLE deparment (
+CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT,
-  deparment_name VARCHAR(50) NOT NULL,
+  department_name VARCHAR(50) NOT NULL,
   PRIMARY KEY (id)
 );
 

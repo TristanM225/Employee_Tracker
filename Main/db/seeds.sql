@@ -1,6 +1,6 @@
 USE tracker_db;
 
-INSERT INTO deparment (deparment_name)
+INSERT INTO department (department_name)
 VALUES
 ('Sales'),
 ('Legal'),

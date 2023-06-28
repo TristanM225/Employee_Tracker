@@ -1,79 +1,58 @@
 const inquirer = require('inquirer');
+const { question } = require("./question");
 const {
-    viewEmployees,
-    viewRoles,
-    viewDepartments,
+    viewAllEmployees,
+    viewAllRoles,
+    viewAllDepartments,
     addDepartment,
     addRole,
     addEmployee,
     removeEmployee,
     updateEmployeeRole,
-} = require('./question');
+} = require('./query');
 
-function init() {
+const makeQuery = (selected) => {
+    let answer = selected.selections;
 
-    inquirer
-        .prompt({
-            type: 'list',
-            name: 'tasks',
-            message: "What would you like to do",
-            choices: [
-                "View All Employees",
-                "View All Roles",
-                "View All Departments",
-                "Add a Department",
-                "Add a Role",
-                "Add a Employee",
-                "Remove a Employee",
-                "Update a Employee Role",
-                "Quit"
-            ]
-
-        })
-        .then(function ({ task }) {
-            switch (task) {
-                case "View All Employees":
-                    viewEmployees();
+            switch (answer) {
+                case question[0]:
+                    viewAllEmployees();
                     break;
 
-                case "View All Roles":
-                    viewRoles();
+                case question[1]:
+                    viewAllRoles();
                     break;
 
-                case "View All Departments":
-                    viewDepartments();
+                case question[2]:
+                    viewAllDepartments();
                     break;
 
-                case "Add a Department":
+                case question[3]:
                     addDepartment();
                     break;
           
-                case "Add a Role":
+                case question[4]:
                     addRole();
                     break;
 
-                case "Add a Employee":
+                case question[5]:
                     addEmployee();
                     break;
 
-                case "Remove a Employee":
+                case question[6]:
                     removeEmployee();
                     break;
 
-                case "Update a Employee Role":
+                case question[7]:
                     updateEmployeeRole();
                     break;
 
-                case "Quit":
-                    connection.quit();
-                    break;
-                    default:
+                case question[8]:
                     break;
 
             }
-        });
-}
+        
+};
 
-init();
 
-export init;
+module.exports = { makeQuery };
