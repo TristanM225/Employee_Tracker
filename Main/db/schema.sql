@@ -23,7 +23,7 @@ CREATE TABLE employee (
 );
 
 -- Creating a table for roles
-CREATE TABLE role (
+CREATE TABLE roles (
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(50) NOT NULL,
     salary DECIMAL NOT NULL,
