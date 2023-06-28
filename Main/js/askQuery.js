@@ -40,7 +40,7 @@ const makeQuery = (selected) => {
                     break;
 
                 case question[6]:
-                    removeEmployee().then(() => init());
+                    removeEmployee();
                     break;
 
                 case question[7]:

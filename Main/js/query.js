@@ -135,7 +135,26 @@ const addEmployee = () => {
       });
   };
 
-function removeEmployee() { }
+const removeEmployee = () => {
+    const destroyEmployee = {
+        type: 'input',
+        name: 'deleteEmployee',
+        message: 'Who would you like to terminate by first name?'
+    };
+    inquirer.prompt(destroyEmployee)
+    .then((response) => {
+      const sql = `DELETE FROM employee WHERE first_name = ?`;
+      const params = [response.deleteEmployee];
+
+      return db.query(sql, params);
+    })
+    .then(() => {
+      console.log("Employee successfully terminated.");
+    })
+    .catch((error) => {
+      console.error("Error terminating employee:", error);
+    }).then(() => init());
+};
 
 const updateEmployeeRole = () => 
     db.query(
