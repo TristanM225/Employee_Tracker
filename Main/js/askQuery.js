@@ -16,15 +16,15 @@ const makeQuery = (selected) => {
 
             switch (answer) {
                 case question[0]:
-                    viewAllEmployees();
+                    viewAllEmployees().then(() => init());
                     break;
 
                 case question[1]:
-                    viewAllRoles();
+                    viewAllRoles().then(() => init());
                     break;
 
                 case question[2]:
-                    viewAllDepartments();
+                    viewAllDepartments().then(() => init());
                     break;
 
                 case question[3]:
@@ -40,15 +40,15 @@ const makeQuery = (selected) => {
                     break;
 
                 case question[6]:
-                    removeEmployee();
+                    removeEmployee().then(() => init());
                     break;
 
                 case question[7]:
-                    updateEmployeeRole();
+                    updateEmployeeRole().then(() => init());
                     break;
 
                 case question[8]:
-                    break;
+                    default:
 
             }
         

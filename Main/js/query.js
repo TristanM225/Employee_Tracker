@@ -26,13 +26,13 @@ const viewAllDepartments = () =>
 
 const viewAllRoles = () =>
     db.query(
-        `SELECT title FROM roles;`).then(([res]) => console.table(res));
+        `SELECT * FROM roles;`).then(([res]) => console.table(res));
 
 
 
 const viewAllEmployees = () =>
     db.query(
-        `SELECT first_name, last_name FROM employee;`).then(([res]) => console.table(res));
+        `SELECT * FROM employee;`).then(([res]) => console.table(res));
 
 const addDepartment = () => {
     const departmentRequest = {
@@ -53,25 +53,86 @@ const addDepartment = () => {
     })
     .catch((error) => {
       console.error("Error adding department:", error);
-    });
+    }).then(() => init());
 };
 const addRole = (role) => {
-    db.query(
-        `INSERT INTO departments (title, salary, department_id) VALUES (${role.requestedName},${requestedSalary}, ${role.requestedDepartment});`,
-        function (err, results) {
-            console.log(results);
-        }
-    );
-};
 
-const addEmployee = () => {
-    db.query(
-        `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (${employee.requestedFirstName}, ${employee.requestedLastName},${employee.requestedRoleID}, ${employee.requestedMangerID})`,
-        function (err, results) {
-            console.log(results);
-        }
-    );
+    const roleRequest = {
+        type: 'input',
+        name: 'requestedRoleName',
+        message: 'What is the name of the new role?'
+    };
+    inquirer.prompt(roleRequest)
+    .then((response) => {
+      const sql = `INSERT INTO departments (title, salary, department_id) VALUES (?)`;
+      const params = [response.requestedRoleName];
+
+      return db.query(sql, params);
+    })
+    .then(() => {
+      console.log("Role successfully added.");
+    })
+    .catch((error) => {
+      console.error("Error adding Role:", error);
+    }).then(() => init());
 };
+// db.query(
+//     `INSERT INTO departments (title, salary, department_id) VALUES (${role.requestedName},${requestedSalary}, ${role.requestedDepartment});`,
+//     function (err, results) {
+//         console.log(results);
+//     }
+// );
+// };
+const addEmployee = () => {
+    const employeeRequest = [
+      {
+        type: 'input',
+        name: 'firstName',
+        message: "Enter the employee's first name:",
+      },
+      {
+        type: 'input',
+        name: 'lastName',
+        message: "Enter the employee's last name:",
+      },
+      {
+        type: 'input',
+        name: 'roleId',
+        message: "Enter the employee's role ID:",
+      },
+      {
+        type: 'input',
+        name: 'managerId',
+        message: "Enter the employee's manager ID:",
+      },
+    ];
+  
+    inquirer
+      .prompt(employeeRequest)
+      .then((response) => {
+        const { firstName, lastName, roleId, managerId } = response;
+        const sql =
+          'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)';
+        const params = [firstName, lastName, roleId, managerId];
+  
+        return db.query(sql, params);
+      })
+      .then(() => {
+        console.log('Employee successfully added.');
+      })
+      .catch((error) => {
+        console.error('Error adding Employee:', error);
+      })
+      .then(() => {
+        init();
+      });
+  };
+//         `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (${employee.requestedFirstName}, ${employee.requestedLastName},${employee.requestedRoleID}, ${employee.requestedMangerID})`,
+//         function (err, results) {
+//             console.log(results);
+//         }
+//     );
+// };
 
 function removeEmployee() { }
 
