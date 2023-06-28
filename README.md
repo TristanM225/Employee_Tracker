@@ -18,6 +18,7 @@ This is a employee tracker where you can view what employee has what job and the
 
 ## Screenshots / Links
 ![Screenshot of project](./Main/assets/employeeTracker.JPG)
+
 Link to a walkthrough video!
 
 [Untitled_ Jun 27, 2023 11_36 PM.webm](https://github.com/TristanM225/Employee_Tracker/assets/126945628/ddf8cc2a-ad9f-4882-b94c-92e681b719f5)
