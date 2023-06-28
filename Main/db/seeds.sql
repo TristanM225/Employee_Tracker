@@ -18,7 +18,7 @@ VALUES
 ('Minnie', 'Mouse', 4, NULL),
 ('Goofy', 'Dog', 6, 6);
 
-INSERT INTO roles (title, salary, deparment_id)
+INSERT INTO roles (title, salary, department_id)
 VALUES
 ('Sale Man', 100000, 1),
 ('Lawyer', 10000, 2),

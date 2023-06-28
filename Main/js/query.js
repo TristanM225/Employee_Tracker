@@ -57,15 +57,28 @@ const addDepartment = () => {
 };
 const addRole = (role) => {
 
-    const roleRequest = {
+    const roleRequest = [
+        {
         type: 'input',
         name: 'requestedRoleName',
         message: 'What is the name of the new role?'
-    };
+    },
+    {
+        type: 'input',
+        name: 'salary',
+        message: 'What is the salary in decimal form?'
+    },
+    {
+        type: 'input',
+        name: 'department',
+        message: 'what department # does it belong to?'
+    },
+];
     inquirer.prompt(roleRequest)
     .then((response) => {
-      const sql = `INSERT INTO departments (title, salary, department_id) VALUES (?)`;
-      const params = [response.requestedRoleName];
+        const {requestedRoleName, salary, department } = response;
+      const sql = `INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)`;
+      const params = [requestedRoleName, salary, department ];
 
       return db.query(sql, params);
     })
@@ -76,13 +89,7 @@ const addRole = (role) => {
       console.error("Error adding Role:", error);
     }).then(() => init());
 };
-// db.query(
-//     `INSERT INTO departments (title, salary, department_id) VALUES (${role.requestedName},${requestedSalary}, ${role.requestedDepartment});`,
-//     function (err, results) {
-//         console.log(results);
-//     }
-// );
-// };
+
 const addEmployee = () => {
     const employeeRequest = [
       {
@@ -127,23 +134,12 @@ const addEmployee = () => {
         init();
       });
   };
-//         `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (${employee.requestedFirstName}, ${employee.requestedLastName},${employee.requestedRoleID}, ${employee.requestedMangerID})`,
-//         function (err, results) {
-//             console.log(results);
-//         }
-//     );
-// };
 
 function removeEmployee() { }
 
-const updateEmployeeRole = () => {
+const updateEmployeeRole = () => 
     db.query(
-        `VALUES (${employee.updateEmployee}, ${employee.updatedRole})`,
-        function (err, results) {
-            console.log(results);
-        }
-    );
-};
+        `SELECT * FROM employee;`).then(([res]) => console.table(res));
 
 
 
